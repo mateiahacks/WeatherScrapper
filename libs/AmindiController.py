@@ -1,5 +1,6 @@
 from .helpers import getDriver, getWeatherDescription
 from selenium.webdriver.common.by import By
+import matplotlib.pyplot as plt
 
 class Amindi:
     def __init__(self, city):
@@ -14,8 +15,8 @@ class Amindi:
         return self._driver
 
     def fetchWeathers(self, days):
-        if days not in [5, 10, 14]:
-            raise Exception("days argument could be only 5, 10 or 14")
+        if days not in [5, 10, 15]:
+            raise Exception("days argument could be only 5, 10 or 15")
 
         self._driver.get(self._url + f"?d={days}")
         weatherElements = self._driver.find_elements(By.CLASS_NAME, "card")
@@ -34,7 +35,7 @@ class Amindi:
                 "celsiuses": celsiuses,
                 "desc": desc,
             })
-        self.weathers = result
+        self._weathers = result
 
         return result
 
@@ -71,6 +72,14 @@ class Amindi:
     
 
     def visualize(self):
-        pass
+        y = [int(w["celsiuses"][1]) for w in self._weathers]
+
+        x = [i for i in range(len(self._weathers))]
+
+        plt.xticks(tuple(x), [w["day"] for w in self._weathers])
+
+        plt.plot(x, y)  
+
+        plt.show()
 
 

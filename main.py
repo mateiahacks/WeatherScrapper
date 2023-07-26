@@ -7,14 +7,13 @@ def main():
 
     amindi = Amindi(cityName)
 
-    Console.out("Enter how many weathers of days you want to get")
-    days = int(input("> "))
+    days = Console.getInt("Enter how many weathers of days you want to get")
     
     Console.out("Fetching...")
     weathers = amindi.fetchWeathers(days)
     Console.out("Finished.")
 
-    Console.out(weathers)
+    Console.outWeathers(weathers)
 
     choice = Console.getInt("(1) visualization, (2) get one day weather (3) next 24 hours hourly weather")
 
@@ -39,7 +38,7 @@ def main():
         choice = Console.getInt("(1) visualization, (2) get one day weather")
 
     if choice == 1:
-        pass
+        amindi.visualize()
     
 
     amindi.closeDriver()

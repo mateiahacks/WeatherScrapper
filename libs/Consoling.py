@@ -31,3 +31,13 @@ class Console:
             hour = item["hour"].split(' ')[0]
             celsius = item["celsius"]
             print(f"{hour} hour: {celsius} celsius")
+        
+    @staticmethod
+    def outWeathers(arr):
+        for item in arr:
+            weekday = item["weekDay"]
+            day = item["day"]
+            min, max = item["celsiuses"][0], item["celsiuses"][1]
+            print(f"{day} {weekday}")
+            print(f"min: {min} - max: {max}")
+            print("\n")
