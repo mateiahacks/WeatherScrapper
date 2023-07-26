@@ -1,8 +1,10 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from .constants import ICONS
 
 def getDriver():
-    options = webdriver.ChromeOptions()
+    options = Options()
+    options.headless = True
     options.add_experimental_option("detach", True)
     driver=webdriver.Chrome(options=options)
 

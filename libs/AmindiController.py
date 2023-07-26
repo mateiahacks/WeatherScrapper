@@ -31,7 +31,7 @@ class Amindi:
 
             result.append({ 
                 "weekDay": weekDay, 
-                "day": day,
+                "day": str(int(day[:2])) + day[2:],
                 "celsiuses": celsiuses,
                 "desc": desc,
             })
@@ -40,7 +40,7 @@ class Amindi:
         return result
 
     def getOneDayWeather(self, date):
-        weathers = self.fetchWeathers(14)
+        weathers = self.fetchWeathers(15)
 
         res = list(filter(lambda x: x["day"] == date, weathers))
         if (len(res) == 0):

@@ -15,31 +15,33 @@ def main():
 
     Console.outWeathers(weathers)
 
-    choice = Console.getInt("(1) visualization, (2) get one day weather (3) next 24 hours hourly weather")
+    choice = 0
+    
+    while choice != 4:
+        choice = Console.getInt("(1) visualization, (2) get one day weather (3) next 24 hours hourly weather (4) exit")
+        if choice == 3:
+            Console.out("Fetching...")
+            hourly = amindi.getHourly()
+            Console.outHours(hourly)
+            continue
 
-    while choice == 3:
-        Console.out("Fetching...")
-        hourly = amindi.getHourly()
-        Console.outHours(hourly)
-        choice = Console.getInt("(1) visualization, (2) get one day weather (3) next 24 hours hourly weather")
-
-    while choice == 2:
-        date = Console.getString("Enter date in following format: [number] [month name]")
-        Console.out("Checking...")
-        res = amindi.getOneDayWeather(date)
-
-        while (len(res) == 0):
-            Console.out("Error: This date weather is not known or it is Entered in invalid format!")
+        if choice == 2:
             date = Console.getString("Enter date in following format: [number] [month name]")
             Console.out("Checking...")
             res = amindi.getOneDayWeather(date)
 
-        Console.outWeather(res)
-        choice = Console.getInt("(1) visualization, (2) get one day weather")
+            if (len(res) == 0):
+                Console.out("Error: This date weather is not known or it is Entered in invalid format!")
+                date = Console.getString("Enter date in following format: [number] [month name]")
+                Console.out("Checking...")
+                res = amindi.getOneDayWeather(date)
 
-    if choice == 1:
-        amindi.visualize()
-    
+            Console.outWeather(res)
+            continue
+
+        if choice == 1:
+            amindi.visualize()
+            continue
 
     amindi.closeDriver()
 
